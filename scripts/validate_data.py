@@ -239,16 +239,27 @@ def validate_level(level, data, cfg, t):
                 t.fail(f'{level}: shop — отсутствует {w}')
         
         empty_cats = []
+        egg_unit_issues = []
         for week, cats in shop.items():
             for cat, items in cats.items():
                 if not items:
                     empty_cats.append(f"{week}, {cat}")
+                for it in items:
+                    # Eggs must be in шт, not grams
+                    if ('яйц' in it['product'].lower() or 'перепел' in it['product'].lower()) and 'г' in it['qty']:
+                        egg_unit_issues.append(f"{week}: {it['product']} — {it['qty']} (должно быть в шт)")
         
         if not empty_cats:
             t.ok(f'{level}: нет пустых категорий в shop')
         else:
             for issue in empty_cats:
                 t.warn(f'{level}: пустая категория в shop — {issue}')
+        
+        if not egg_unit_issues:
+            t.ok(f'{level}: яйца в shop считаются в штуках')
+        else:
+            for issue in egg_unit_issues:
+                t.fail(f'{level}: {issue}')
     
     # ═══ 8. PREP ═══
     if prep:
