@@ -98,16 +98,17 @@ keto-latte, broccoli-soup, chicken-drumsticks, egg-bites
 ## Валидация
 
 ```bash
-python3 scripts/validate_data.py .
+# Из корня meta30-data (репозитории рядом):
+python3 ../meta30_cabinet/scripts/validate_data.py .
 ```
 
-Скрипт проверяет: структуру, макросы, rk ключи, запрещённые строки, дубли в prep, shop полноту.
+Скрипт проверяет: структуру, макросы, rk ключи, запрещённые строки, дубли в prep, shop полноту, яйца в штуках.
 
-## Скрипты
+## Скрипты (хранятся в meta30_cabinet/scripts/)
 
 | Скрипт | Назначение |
 |--------|-----------|
-| `scripts/validate_data.py` | Автотесты данных |
-| `scripts/parse_menu_csv.py` | CSV из Notion → JSON (+ встроенный валидатор) |
-| `scripts/recalc_shop_prep.py` | Пересчёт shop/prep из menu |
-| `scripts/build_articles.py` | Markdown из Notion → HTML для articles.json |
+| `validate_data.py` | Автотесты данных (запускать перед каждым пушем) |
+| `parse_menu_csv.py` | CSV из Notion → JSON (menu + встроенный валидатор) |
+| `recalc_shop_prep.py` | Пересчёт shop/prep из menu |
+| `build_articles.py` | Markdown из Notion → HTML для articles.json |
